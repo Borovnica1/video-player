@@ -95,6 +95,10 @@ body {
   transition: .2s all;
 }
 
+.player__controls > div {
+  position: relative;
+}
+
 .player:hover .player__controls,
 .player:focus .player__controls {
   opacity: 1;
@@ -121,9 +125,42 @@ body {
   color: #fff;
 }
 
+.sound-div {
+  display: inline-block;
+  width: 50px;
+}
 
+.sound,
+.mute-sound {
+  display: none;
+}
+
+.sound-bar {
+  position: absolute;
+  top: 45%;
+  display: inline-block;
+  opacity: 0;
+  max-width: 0px;
+  height: 5px;
+  cursor: pointer;
+  transition: .2s;
+  outline: none;
+}
 
 .video--active,
 .video--active {
   display: none;
+}
+
+.sound--active {
+  display: inline-block;
+}
+
+.sound-div--active {
+  width: 150px;
+}
+
+.sound-div--active .sound-bar {
+  opacity: 1;
+  max-width: 100px;
 }

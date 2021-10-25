@@ -5,7 +5,13 @@ const stopBtn = document.querySelector('.stop');
 const stopCircleBtn = document.querySelector('.play-pause-circle-stop');
 const playCircle = document.querySelector('.play-pause-circle')
 
-console.log('JJJ', video.autoplay);
+const soundIcon = document.querySelector('.sound');
+const soundMuteIcon = document.querySelector('.mute-sound');
+const soundBar = document.querySelector('.sound-bar');
+const soundDiv = document.querySelector('.sound-div')
+let lastVolumeValue = soundBar.value;
+
+console.log('JJJ', video.autoplay, lastVolumeValue);
 
 function togglePlayPause() {
   playBtn.classList.toggle('video--active');
@@ -36,10 +42,48 @@ function removeCircleAnim() {
 
 function handleKeys(e) {
   if (e.key === 'k' || e.key === 'K') togglePlayPause.call(video);
+  if (e.key === 'm' || e.key === 'M') toggleSound();
 };
+
+function muteSound() {
+  lastVolumeValue = video.volume*100;
+  video.volume = 0;
+  soundBar.value = 0;
+};
+
+function unmuteSound() {
+  video.volume = lastVolumeValue/100;
+  soundBar.value = lastVolumeValue;
+};
+
+function toggleSound() {
+  soundIcon.classList.toggle('sound--active');
+  soundMuteIcon.classList.toggle('sound--active');
+  if (soundIcon.classList.contains('sound--active')) unmuteSound();
+  else muteSound();
+};
+
+function handleSound() {
+  const volume = Number(this.value);
+  if (volume === 0 && soundIcon.classList.contains('sound--active')) toggleSound();
+  else if (volume > 0 && soundMuteIcon.classList.contains('sound--active'))toggleSound();
+  video.volume = volume/100;
+};
+
+function toggleSoundBar() {
+  soundDiv.classList.toggle('sound-div--active');
+}
 
 playCircle.addEventListener('animationend', removeCircleAnim)
 playBtn.addEventListener('click', togglePlayPause);
 stopBtn.addEventListener('click', togglePlayPause);
 video.addEventListener('click', togglePlayPause);
 window.addEventListener('keydown', handleKeys);
+
+soundIcon.addEventListener('click', toggleSound);
+soundMuteIcon.addEventListener('click', toggleSound);
+soundDiv.addEventListener('mouseenter', toggleSoundBar);
+soundDiv.addEventListener('mouseenter', toggleSoundBar);
+soundDiv.addEventListener('mouseleave', toggleSoundBar);
+soundDiv.addEventListener('mouseleave', toggleSoundBar);
+soundBar.addEventListener('input', handleSound);
