@@ -15,6 +15,12 @@
       <button class="play-pause-circle-btn play-pause-circle-play video--active" data-icon="P" aria-label="play pause toggle"></button>
       <button class="play-pause-circle-btn play-pause-circle-stop" data-icon="S" aria-label="stop"></button>
     </div>
+    <div class="f-b-circle f-b-circle--forward">
+      <button class="forward-backward-btn forward-btn" data-icon="F" aria-label="forward"></button>
+    </div>
+    <div class="f-b-circle f-b-circle--backward">
+      <button class="forward-backward-btn backward-btn" data-icon="B" aria-label="backward"></button>
+    </div>
     <video class="video">
       <source src="penguins-video.webm" type="video/webm">
       <source src="penguins-video.mp4" type="video/mp4">
@@ -47,7 +53,15 @@
 
     </div>
   </div>
-  
+  <div style="margin-top: 50px; margin-left: 50px;">
+    <h3>KEYBOARD SHORTCUTS:</h3>
+    <h4>k - pause</h4>
+    <h4>j - go back 10 seconds</h4>
+    <h4>l - go forward 10 seconds</h4>
+  </div>
+
+
+
   <script src="script.js"></script>
 </body>
 </html>

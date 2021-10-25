@@ -14,6 +14,9 @@ let lastVolumeValue = soundBar.value;
 const currentTime = document.querySelector('.time-passed');
 const videoDuration = document.querySelector('.video-duration');
 
+const circleForward = document.querySelector('.f-b-circle--forward')
+const circleBackward = document.querySelector('.f-b-circle--backward')
+
 setInterval(() => {
   const time = `${Math.floor(video.currentTime / 60)}:${String(Math.floor(video.currentTime % 60)).padStart(2, "0")}`
   currentTime.textContent = time;
@@ -48,12 +51,30 @@ function displayCircleAnim() {
 }
 
 function removeCircleAnim() {
-  playCircle.classList.remove('play-pause-circle--anim');
+  this.classList.remove('play-pause-circle--anim');
 };
+
+function skipVideo(direction) {
+  if (direction === 'goForward') {
+    video.currentTime += 10;
+
+    circleForward.classList.remove('play-pause-circle--anim');
+    void circleForward.offsetWidth; 
+    circleForward.classList.add('play-pause-circle--anim');
+  } else {
+    video.currentTime -= 10;
+
+    circleBackward.classList.remove('play-pause-circle--anim');
+    void circleBackward.offsetWidth; 
+    circleBackward.classList.add('play-pause-circle--anim');
+  }
+}
 
 function handleKeys(e) {
   if (e.key === 'k' || e.key === 'K') togglePlayPause.call(video);
   if (e.key === 'm' || e.key === 'M') toggleSound();
+  if (e.key === 'j' || e.key === 'J') skipVideo('goBack');
+  if (e.key === 'l' || e.key === 'L') skipVideo('goForward');
 };
 
 function muteSound() {
@@ -86,6 +107,8 @@ function toggleSoundBar() {
 }
 
 playCircle.addEventListener('animationend', removeCircleAnim)
+circleForward.addEventListener('animationend', removeCircleAnim)
+circleBackward.addEventListener('animationend', removeCircleAnim)
 playBtn.addEventListener('click', togglePlayPause);
 stopBtn.addEventListener('click', togglePlayPause);
 video.addEventListener('click', togglePlayPause);

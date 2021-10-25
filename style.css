@@ -174,3 +174,37 @@ body {
   color: white;
   margin-left: 10px;
 }
+
+.f-b-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+}
+.f-b-circle--backward {
+  left: 20%;
+}
+.f-b-circle--forward {
+  left: 80%;
+}
+.forward-backward-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: transparent;
+  border: 0;
+}
+.forward-backward-btn::after {
+  font-family: HeydingsControlsRegular;
+  display: block;
+  font-size: 26px;
+  height: 35px;
+  content: attr(data-icon);
+  color: #fff;
+}
