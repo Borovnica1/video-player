@@ -11,7 +11,18 @@ const soundBar = document.querySelector('.sound-bar');
 const soundDiv = document.querySelector('.sound-div')
 let lastVolumeValue = soundBar.value;
 
-console.log('JJJ', video.autoplay, lastVolumeValue);
+const currentTime = document.querySelector('.time-passed');
+const videoDuration = document.querySelector('.video-duration');
+
+setInterval(() => {
+  const time = `${Math.floor(video.currentTime / 60)}:${String(Math.floor(video.currentTime % 60)).padStart(2, "0")}`
+  currentTime.textContent = time;
+}, 0100);
+
+function updateVideoDuration() {
+  const duration = `${Math.floor(video.duration / 60)}:${String(Math.floor(video.duration % 60)).padStart(2, "0")}`
+  videoDuration.textContent = duration;
+};
 
 function togglePlayPause() {
   playBtn.classList.toggle('video--active');
@@ -87,3 +98,5 @@ soundDiv.addEventListener('mouseenter', toggleSoundBar);
 soundDiv.addEventListener('mouseleave', toggleSoundBar);
 soundDiv.addEventListener('mouseleave', toggleSoundBar);
 soundBar.addEventListener('input', handleSound);
+
+video.addEventListener('durationchange', updateVideoDuration);

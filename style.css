@@ -9,6 +9,7 @@
   padding: 0%;
   margin: 0%;
   box-sizing: border-box;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 body {
@@ -96,6 +97,8 @@ body {
 }
 
 .player__controls > div {
+  display: flex;
+  align-items: center;
   position: relative;
 }
 
@@ -128,6 +131,7 @@ body {
 .sound-div {
   display: inline-block;
   width: 50px;
+  transition: .2s;
 }
 
 .sound,
@@ -163,4 +167,10 @@ body {
 .sound-div--active .sound-bar {
   opacity: 1;
   max-width: 100px;
+}
+
+.video-time {
+  display: inline-block;
+  color: white;
+  margin-left: 10px;
 }
