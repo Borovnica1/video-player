@@ -1,0 +1,129 @@
+@font-face {
+  font-family: 'HeydingsControlsRegular';
+  src: url(fonts/font33.woff) format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgba(71, 43, 107, 0.445);
+}
+
+.player {
+  width: 90%;
+  max-width: 1050px;
+  margin: auto;
+  margin-top: 100px;
+  position: relative;
+}
+
+.play-pause-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+}
+
+.play-pause-circle--anim {
+  animation: play-pause-anim .5s;
+}
+
+.play-pause-circle-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: transparent;
+  border: 0;
+}
+
+.play-pause-circle-btn::after {
+  font-family: HeydingsControlsRegular;
+  display: block;
+  font-size: 26px;
+  height: 35px;
+  content: attr(data-icon);
+  color: #fff;
+}
+
+.remove-animation {
+  animation: none !important;
+}
+
+@keyframes play-pause-anim {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2);
+  }
+}
+
+
+
+.player video {
+  width: 100%;
+}
+
+.player__controls {
+  /* display: flex; */
+  /* opacity: 0; */
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  position: absolute;
+  bottom: 4px;
+  left: 0%;
+  background-color: rgba(0, 0, 0, 0.116);
+  transition: .2s all;
+}
+
+.player:hover .player__controls,
+.player:focus .player__controls {
+  opacity: 1;
+}
+
+.player__controls button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+}
+
+.player__controls button:hover {
+  background-color: rgba(255, 0, 0, 0.425);
+}
+
+.player__controls button:before {
+  font-family: HeydingsControlsRegular;
+  display: block;
+  font-size: 36px;
+  height: 50px;
+  content: attr(data-icon);
+  color: #fff;
+}
+
+
+
+.video--active,
+.video--active {
+  display: none;
+}
