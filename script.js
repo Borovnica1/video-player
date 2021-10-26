@@ -30,7 +30,9 @@ const settingsMenuBG = document.querySelector('.settings-menu-bg');
 const goBacks = document.querySelectorAll('.go-back');
 const playBackOptions = document.querySelectorAll('.playback-speed-ul > li:not(.go-back)');
 const playBackH6 = document.querySelector('.playback-speed-curr--h6');
-const setMenuBGy = Number(settingsMenuMain.clientHeight);
+let setMenuBGy;
+
+const fullScreenBtns = document.querySelectorAll('.fullscreen');
 
 
 setInterval(() => {
@@ -91,6 +93,9 @@ function handleKeys(e) {
   if (e.key === 'm' || e.key === 'M') toggleSound();
   if (e.key === 'j' || e.key === 'J') skipVideo('goBack');
   if (e.key === 'l' || e.key === 'L') skipVideo('goForward');
+  if (e.key === "Enter") {
+    toggleFullScreen();
+  }
 };
 
 function muteSound() {
@@ -140,8 +145,11 @@ function openSettingsMenu() {
     closeAllSettingsMenus();
     settingsMenuBG.classList.remove('settings-menu-bg--active');
     settingsBtn.style.backgroundColor = 'transparent';
+    settingsMenu.classList.remove('settings-menu--active');
   } else {
     updateSettingsBackground(settingsMenuMain);
+    settingsMenu.classList.add('settings-menu--active');
+    setMenuBGy = Number(settingsMenuMain.clientHeight);
     settingsMenuBG.classList.add('settings-menu-bg--active');
     settingsMenuMain.classList.add('settings--active')
     settingsBtn.style.backgroundColor = 'rgba(255, 0, 0, 0.425)';
@@ -177,7 +185,22 @@ function changePlaybackRate() {
   closeAllSettingsMenus();
   settingsMenuBG.classList.remove('settings-menu-bg--active');
   settingsBtn.style.backgroundColor = 'transparent';
+  settingsMenu.classList.remove('settings-menu--active');
 };
+
+const player = document.querySelector('.player')
+
+function toggleFullScreen() {
+  for (let fullScreenBtn of fullScreenBtns) fullScreenBtn.classList.toggle('fullscreen--active');
+  
+  if (!document.fullscreenElement) {
+      player.requestFullscreen();
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+}
 
 playCircle.addEventListener('animationend', removeCircleAnim)
 circleForward.addEventListener('animationend', removeCircleAnim)
@@ -205,4 +228,8 @@ for (let goBack of goBacks) {
 };
 for (let playBack of playBackOptions) {
   playBack.addEventListener('click', changePlaybackRate);
+}
+
+for (let btn of fullScreenBtns) {
+  btn.addEventListener('click', toggleFullScreen);
 }
