@@ -17,6 +17,22 @@ const videoDuration = document.querySelector('.video-duration');
 const circleForward = document.querySelector('.f-b-circle--forward')
 const circleBackward = document.querySelector('.f-b-circle--backward')
 
+const settingsBtn = document.querySelector('.settings-btn');
+const playBackLi = document.querySelector('.playback-speed-li');
+const qualityLi = document.querySelector('.quality-li');
+const settingsPlaybackMenu = document.querySelector('.playback-speed-ul');
+const qualityMenu = document.querySelector('.xul');
+const settingsBtnIcon = document.querySelector('.settings-btn');
+const settingsMenus = document.querySelectorAll('.settings-menu ul');
+const settingsMenu = document.querySelector('.settings-menu');
+const settingsMenuMain = document.querySelector('.settings-menu ul:nth-child(2)');
+const settingsMenuBG = document.querySelector('.settings-menu-bg');
+const goBacks = document.querySelectorAll('.go-back');
+const playBackOptions = document.querySelectorAll('.playback-speed-ul > li:not(.go-back)');
+const playBackH6 = document.querySelector('.playback-speed-curr--h6');
+const setMenuBGy = Number(settingsMenuMain.clientHeight);
+
+
 setInterval(() => {
   const time = `${Math.floor(video.currentTime / 60)}:${String(Math.floor(video.currentTime % 60)).padStart(2, "0")}`
   currentTime.textContent = time;
@@ -104,7 +120,64 @@ function handleSound() {
 
 function toggleSoundBar() {
   soundDiv.classList.toggle('sound-div--active');
+};
+
+function goBackToMenu() {
+  closeAllSettingsMenus();
+  updateSettingsBackground(settingsMenuMain);
+  settingsMenuBG.classList.add('settings-menu-bg--active');
+  settingsMenuMain.classList.add('settings--active')
 }
+
+function closeAllSettingsMenus() {
+  for(let menu of settingsMenus) {
+    menu.classList.remove('settings--active');
+  }
+}
+
+function openSettingsMenu() {
+  if (settingsMenuBG.classList.contains('settings-menu-bg--active')) {
+    closeAllSettingsMenus();
+    settingsMenuBG.classList.remove('settings-menu-bg--active');
+    settingsBtn.style.backgroundColor = 'transparent';
+  } else {
+    updateSettingsBackground(settingsMenuMain);
+    settingsMenuBG.classList.add('settings-menu-bg--active');
+    settingsMenuMain.classList.add('settings--active')
+    settingsBtn.style.backgroundColor = 'rgba(255, 0, 0, 0.425)';
+  };
+};
+
+function updateSettingsBackground(menu) {
+  settingsMenuBG.style.transform = `scaleY(${menu.clientHeight/setMenuBGy})`;
+};
+
+function openPlaybackMenu() {
+  closeAllSettingsMenus();
+  updateSettingsBackground(settingsPlaybackMenu);
+  settingsPlaybackMenu.classList.add('settings--active');
+};
+
+function openQualityMenu() {
+  closeAllSettingsMenus();
+  updateSettingsBackground(qualityMenu);
+  qualityMenu.classList.add('settings--active');
+};
+
+function changePlaybackRate() {
+  const playbackRateValue = this.textContent === 'Normal' ? 1 : Number(this.textContent);
+  video.playbackRate = playbackRateValue;
+
+  playBackH6.textContent = this.textContent;
+  for (let playBack of playBackOptions) {
+    playBack.querySelector('span').classList.remove('playback-speed-curr');
+  }
+  this.querySelector('span').classList.add('playback-speed-curr');
+ 
+  closeAllSettingsMenus();
+  settingsMenuBG.classList.remove('settings-menu-bg--active');
+  settingsBtn.style.backgroundColor = 'transparent';
+};
 
 playCircle.addEventListener('animationend', removeCircleAnim)
 circleForward.addEventListener('animationend', removeCircleAnim)
@@ -123,3 +196,13 @@ soundDiv.addEventListener('mouseleave', toggleSoundBar);
 soundBar.addEventListener('input', handleSound);
 
 video.addEventListener('durationchange', updateVideoDuration);
+
+settingsBtn.addEventListener('click', openSettingsMenu);
+playBackLi.addEventListener('click', openPlaybackMenu);
+qualityLi.addEventListener('click', openQualityMenu);
+for (let goBack of goBacks) {
+  goBack.addEventListener('click', goBackToMenu);
+};
+for (let playBack of playBackOptions) {
+  playBack.addEventListener('click', changePlaybackRate);
+}

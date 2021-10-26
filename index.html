@@ -13,7 +13,7 @@
   <div class="player">
     <div class="play-pause-circle ">
       <button class="play-pause-circle-btn play-pause-circle-play video--active" data-icon="P" aria-label="play pause toggle"></button>
-      <button class="play-pause-circle-btn play-pause-circle-stop" data-icon="S" aria-label="stop"></button>
+      <button class="play-pause-circle-btn play-pause-circle-stop" data-icon="u" aria-label="stop"></button>
     </div>
     <div class="f-b-circle f-b-circle--forward">
       <button class="forward-backward-btn forward-btn" data-icon="F" aria-label="forward"></button>
@@ -34,7 +34,7 @@
       <div class="player__controls">
         <div>
           <button class="play" data-icon="P" aria-label="play pause toggle"></button>
-          <button class="stop video--active" data-icon="S" aria-label="stop"></button>
+          <button class="stop video--active" data-icon="u" aria-label="stop"></button>
           <div class="sound-div">
             <button class="sound sound--active" data-icon="x" aria-label="sound"></button>
             <button class="mute-sound " data-icon="Q" aria-label="sound"></button>
@@ -45,7 +45,48 @@
           </div>
         </div>
         <div>
-          <button class="play" data-icon="P" aria-label="play pause toggle"></button>
+          <div class="settings-div">
+            <button class="settings-btn" data-icon="z" aria-label="play pause toggle"></button>
+            <div class="settings-menu">
+              <div class="settings-menu-bg"></div>
+              <ul class="">
+                <li class="playback-speed-li">
+                  <h5>Playback Speed</h5>
+                  <h6 class="playback-speed-curr playback-speed-curr--h6">Normal</h6>
+                </li>
+                <li class="quality-li">
+                  <h5>Quality???</h5>
+                  <h6>Auto 720p</h6>
+                </li>
+              </ul>
+              
+              <ul class="playback-speed-ul">
+                <li class="go-back">
+                  <button class="back" data-icon="U" aria-label="back"></button>
+                  <h5>Go back</h5>
+                </li>
+                <li><span>0.25</span></li>
+                <li><span>0.5</span></li>
+                <li><span>0.75</span></li>
+                <li><span class="playback-speed-curr">Normal</span></li>
+                <li><span>1.25</span></li>
+                <li><span>1.5</span></li>
+                <li><span>1.75</span></li>
+                <li><span>2</span></li>
+              </ul>
+              <ul class="xul">
+                <li class="go-back">
+                  <button class="back" data-icon="U" aria-label="back"></button>
+                  <h5>Go back</h5>
+                </li>
+                <li><span>X</span></li>
+                <li><span>aaaa</span></li>
+                <li><span>bbfdb</span></li>
+                <li><span>1.75</span></li>
+                <li><span>93493</span></li>
+              </ul>
+            </div>
+          </div>
           <button class="stop" data-icon="S" aria-label="stop"></button>
           <button class="fullscreen" data-icon="M" aria-label="stop"></button>
         </div>
