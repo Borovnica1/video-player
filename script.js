@@ -32,6 +32,7 @@ const playBackOptions = document.querySelectorAll('.playback-speed-ul > li:not(.
 const playBackH6 = document.querySelector('.playback-speed-curr--h6');
 let setMenuBGy;
 
+const player = document.querySelector('.player')
 const fullScreenBtns = document.querySelectorAll('.fullscreen');
 
 
@@ -143,16 +144,17 @@ function closeAllSettingsMenus() {
 function openSettingsMenu() {
   if (settingsMenuBG.classList.contains('settings-menu-bg--active')) {
     closeAllSettingsMenus();
+    updateSettingsBackground(settingsMenuMain);
     settingsMenuBG.classList.remove('settings-menu-bg--active');
     settingsBtn.style.backgroundColor = 'transparent';
     settingsMenu.classList.remove('settings-menu--active');
   } else {
-    updateSettingsBackground(settingsMenuMain);
     settingsMenu.classList.add('settings-menu--active');
-    setMenuBGy = Number(settingsMenuMain.clientHeight);
+    settingsMenuMain.classList.add('settings--active');
     settingsMenuBG.classList.add('settings-menu-bg--active');
-    settingsMenuMain.classList.add('settings--active')
     settingsBtn.style.backgroundColor = 'rgba(255, 0, 0, 0.425)';
+    setMenuBGy = Number(settingsMenuMain.clientHeight);
+    updateSettingsBackground(settingsMenuMain);
   };
 };
 
@@ -188,11 +190,10 @@ function changePlaybackRate() {
   settingsMenu.classList.remove('settings-menu--active');
 };
 
-const player = document.querySelector('.player')
 
 function toggleFullScreen() {
   for (let fullScreenBtn of fullScreenBtns) fullScreenBtn.classList.toggle('fullscreen--active');
-  
+
   if (!document.fullscreenElement) {
       player.requestFullscreen();
   } else {

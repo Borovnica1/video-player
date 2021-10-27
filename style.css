@@ -224,10 +224,11 @@ body {
 .settings-menu {
   position: absolute;
   bottom: calc(100% + 10px);
-  left: -60px;
+  left: -110px;
   padding: 5px 0;
   transition: .3s;
   width: 200px;
+  height: 80px;
   display: none;
 }
 
@@ -263,9 +264,6 @@ body {
 
 .settings-menu ul li:hover {
   background-color: rgba(196, 196, 196, 0.507);
-}
-
-.settings-menu ul:nth-child(2) {
 }
 
 .settings-menu > ul {
