@@ -86,16 +86,19 @@ body {
 }
 
 .player__controls {
-  /* display: flex; */
-  /* opacity: 0; */
   display: flex;
+  /* opacity: 0; */
   justify-content: space-between;
   width: 100%;
   position: absolute;
   bottom: 0;
   left: 0%;
-  background-color: rgba(0, 0, 0, 0.116);
-  transition: .2s all;
+  background: linear-gradient(to top,  rgba(0, 0, 0, 0.137), transparent);
+  transition: .2s;
+}
+
+.player:hover .player__controls {
+  opacity: 1;
 }
 
 .player__controls > div {
@@ -118,8 +121,10 @@ body {
   outline: none;
 }
 
-.player__controls button:hover {
-  background-color: rgba(255, 0, 0, 0.425);
+.player__controls > div > button:hover,
+.settings-div:hover > .settings-btn,
+.sound:hover {
+  background: linear-gradient(to top, rgba(255, 0, 0, 0.425), transparent);
 }
 
 .player__controls button:before {
@@ -144,7 +149,9 @@ body {
 
 .sound-bar {
   position: absolute;
-  top: 45%;
+  top: 50%;
+  transform: translate(0%, -50%);
+  padding: 20px 0;
   display: inline-block;
   opacity: 0;
   max-width: 0px;
@@ -223,7 +230,7 @@ body {
 
 .settings-menu {
   position: absolute;
-  bottom: calc(100% + 10px);
+  bottom: calc(100% + 20px);
   left: -110px;
   padding: 5px 0;
   transition: .3s;
@@ -306,4 +313,56 @@ body {
 
 .fullscreen--active {
   display: inline-block;
+}
+
+.player__progress {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 1%;
+  width: 98%;
+  height: 3px;
+  background-color: rgba(255, 0, 255, 0.37);
+  cursor: pointer;
+}
+
+.player__progress--active .player__progress{
+  transform: scaleY(1.6);
+}
+
+.player__progress--active  .player__progerss-scrubble {
+  display: block;
+}
+
+.player__progress--active .player__progress-top {
+  margin-top: -12px;
+}
+
+.player__progress-top {
+  display: block;
+  margin-top: -6px;
+  width: 100%;
+  height: 20px;
+  background-color: transparent;
+}
+
+.player__progress-scrubble-bar {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 1%;
+  width: 0%;
+  height: 3px;
+  background-color: red;
+  cursor: pointer;
+}
+
+.player__progerss-scrubble {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 14px;
+  height: 14px;
+  background-color: red;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
 }

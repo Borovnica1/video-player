@@ -35,10 +35,17 @@ let setMenuBGy;
 const player = document.querySelector('.player')
 const fullScreenBtns = document.querySelectorAll('.fullscreen');
 
+const playerProgress = document.querySelector('.player__progress');
+const playerProgressScrubbleBar = document.querySelector('.player__progress-scrubble-bar');
+const playerControls = document.querySelector('.player__controls');
+
 
 setInterval(() => {
-  const time = `${Math.floor(video.currentTime / 60)}:${String(Math.floor(video.currentTime % 60)).padStart(2, "0")}`
+  const time = `${Math.floor(video.currentTime / 60)}:${String(Math.floor(video.currentTime % 60)).padStart(2, "0")}`;
   currentTime.textContent = time;
+
+  const videoTimeInPercent = (video.currentTime / video.duration) * 100;
+  playerProgressScrubbleBar.style.width = `${videoTimeInPercent * 0.98}%`;
 }, 0100);
 
 function updateVideoDuration() {
@@ -146,13 +153,13 @@ function openSettingsMenu() {
     closeAllSettingsMenus();
     updateSettingsBackground(settingsMenuMain);
     settingsMenuBG.classList.remove('settings-menu-bg--active');
-    settingsBtn.style.backgroundColor = 'transparent';
+    settingsBtn.style.background = 'transparent';
     settingsMenu.classList.remove('settings-menu--active');
   } else {
     settingsMenu.classList.add('settings-menu--active');
     settingsMenuMain.classList.add('settings--active');
     settingsMenuBG.classList.add('settings-menu-bg--active');
-    settingsBtn.style.backgroundColor = 'rgba(255, 0, 0, 0.425)';
+    settingsBtn.style.background = 'linear-gradient(to top, rgba(255, 0, 0, 0.425), transparent)';
     setMenuBGy = Number(settingsMenuMain.clientHeight);
     updateSettingsBackground(settingsMenuMain);
   };
@@ -185,8 +192,9 @@ function changePlaybackRate() {
   this.querySelector('span').classList.add('playback-speed-curr');
  
   closeAllSettingsMenus();
+  updateSettingsBackground(settingsMenuMain);
   settingsMenuBG.classList.remove('settings-menu-bg--active');
-  settingsBtn.style.backgroundColor = 'transparent';
+  settingsBtn.style.background = 'transparent';
   settingsMenu.classList.remove('settings-menu--active');
 };
 
@@ -201,7 +209,23 @@ function toggleFullScreen() {
       document.exitFullscreen();
     }
   }
-}
+};
+
+function toggleProgressBar() {
+  playerControls.classList.toggle('player__progress--active');
+};
+
+function playAtThisTimeVideo(e) {
+  const progressBarStats = playerProgress.getBoundingClientRect();
+  const progressBarStart = progressBarStats.x;
+  const progressBarEnd = progressBarStats.x + progressBarStats.width;
+  const percentWhereClicked = ((e.x - progressBarStart) / (progressBarEnd - progressBarStart)) * 100;
+  const percentWidthProgress = percentWhereClicked * 0.98;
+  const oneWidthPercentOfVideoTime = video.duration / 100;
+
+  playerProgressScrubbleBar.style.width = `${percentWidthProgress}%`;
+  video.currentTime = oneWidthPercentOfVideoTime * percentWhereClicked;
+};
 
 playCircle.addEventListener('animationend', removeCircleAnim)
 circleForward.addEventListener('animationend', removeCircleAnim)
@@ -234,3 +258,11 @@ for (let playBack of playBackOptions) {
 for (let btn of fullScreenBtns) {
   btn.addEventListener('click', toggleFullScreen);
 }
+
+playerProgress.addEventListener('mouseenter', toggleProgressBar);
+playerProgressScrubbleBar.addEventListener('mouseenter', toggleProgressBar);
+playerProgress.addEventListener('mouseleave', toggleProgressBar);
+playerProgressScrubbleBar.addEventListener('mouseleave', toggleProgressBar);
+
+playerProgress.addEventListener('click', playAtThisTimeVideo);
+playerProgressScrubbleBar.addEventListener('click', playAtThisTimeVideo);

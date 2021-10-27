@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="player">
+  <div class="player --active">
     <div class="play-pause-circle ">
       <button class="play-pause-circle-btn play-pause-circle-play video--active" data-icon="P" aria-label="play pause toggle"></button>
       <button class="play-pause-circle-btn play-pause-circle-stop" data-icon="u" aria-label="stop"></button>
@@ -28,10 +28,15 @@
     </video>
 
     <div class="player__bottom">
-      <div class="player__progress">
 
-      </div>
       <div class="player__controls">
+        <span class="player__progress">
+          <span class="player__progress-top"></span>
+          <span class="player__progress-bar"></span>
+        </span>
+        <span class="player__progress-scrubble-bar">
+          <span class="player__progerss-scrubble"></span>
+        </span>
         <div>
           <button class="play" data-icon="P" aria-label="play pause toggle"></button>
           <button class="stop video--active" data-icon="u" aria-label="stop"></button>
