@@ -46,7 +46,7 @@ setInterval(() => {
 
   const videoTimeInPercent = (video.currentTime / video.duration) * 100;
   playerProgressScrubbleBar.style.width = `${videoTimeInPercent * 0.98}%`;
-}, 0100);
+}, 100);
 
 function updateVideoDuration() {
   const duration = `${Math.floor(video.duration / 60)}:${String(Math.floor(video.duration % 60)).padStart(2, "0")}`

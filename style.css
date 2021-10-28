@@ -10,6 +10,7 @@
   margin: 0%;
   box-sizing: border-box;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 12px;
 }
 
 body {
@@ -365,4 +366,71 @@ body {
   background-color: red;
   border-radius: 50%;
   transform: translate(-50%, -50%);
+}
+
+
+@media (max-width: 410px) {
+  * {
+    font-size: 10px;
+  }
+
+  .play-pause-circle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .f-b-circle {
+    width: 30px;
+    height: 30px;
+  }
+
+  .forward-backward-btn {
+    top: 72%;
+  }
+  
+  .forward-backward-btn::after {
+    font-size: 16px;
+  }
+
+  .player__controls button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .player__controls button:before {
+    font-size: 26px;
+    height: 30px;
+  }
+
+  .player__progress {
+    bottom: 100%;
+  }
+
+  .player__progress-scrubble-bar {
+    bottom: 100%;
+  }
+
+  .settings-menu > ul > li {
+    padding: 4px 6px;
+  }
+
+  .settings-menu-bg {
+    height: 48px;
+    width: 140px;
+  }
+
+  .settings-menu {
+    height: 48px;
+    width: 140px;
+    left: -70px;
+    bottom: calc(100% + 8px);
+  }
+
+  .sound-div--active {
+    width: 90px;
+  }
+  
+  .sound-div--active .sound-bar {
+    max-width: 50px;
+  }
 }
